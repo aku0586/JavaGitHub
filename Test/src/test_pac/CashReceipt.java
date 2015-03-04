@@ -2,13 +2,9 @@ package test_pac;
 
 public class CashReceipt {
 
-	 
-	
-	public String CashReceipt()      
-    {                  
-     
-        try {             
-            
+	public String CashReceipt()  
+    {   
+        try { 
              local.intranet.uslx135.AmKorPaymentRequestReply.WebService.processCashReceipt_WSD_v1.ProcessCashReceipt_WSD_v1 a = new local.intranet.uslx135.AmKorPaymentRequestReply.WebService.processCashReceipt_WSD_v1.ProcessCashReceipt_WSD_v1Locator();
              local.intranet.uslx135.AmKorPaymentRequestReply.WebService.processCashReceipt_WSD_v1.ProcessCashReceipt_WSD_v1_PortType amKorABNRequestReply_Apps_CTI_CashReceiptPort0 = a.getAmKorPaymentRequestReply_WebService_processCashReceipt_WSD_v1_Port();
              
@@ -26,18 +22,19 @@ public class CashReceipt {
              _input.setCRDISTClass("0");
              _input.setCRTRANSMITREASON("3");           
              
-             
              req.setInput(_input);
 
              res =  amKorABNRequestReply_Apps_CTI_CashReceiptPort0.processCashReceipt_v1(req);
-     
+
+            /*
             System.out.println("getCRDISTClass : " +  res.getOutput().getCRDISTClass());
             System.out.println("getOrder : " + res.getOutput().getOrder());
             System.out.println("getVPSReference : " + res.getOutput().getVPSReference());
             System.out.println("getCRIDNO : " + res.getOutput().getCRIDNO());
             System.out.println("getCRDISTClass : " + res.getOutput().getCRDISTClass());
             System.out.println("getCRDISTClass : " + res.getOutput().getCRTRANSMITREASON());
-            
+            */
+             
         } catch(javax.xml.rpc.ServiceException ex) {
             // TODO handle ServiceException
          System.out.println("ServiceException : " + ex.toString());
@@ -53,7 +50,4 @@ public class CashReceipt {
        return "00";
     }
  
- 
- 
-
 }
