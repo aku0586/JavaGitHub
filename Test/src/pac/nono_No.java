@@ -29,11 +29,8 @@ public class nono_No {
 		    para_class pst = new para_class();
 		    ProgramParameter[] parameterList = pst.para();
 		     
-		     System.out.println("여기는 왔나");
- 		  
 			 program.setProgram(programName, parameterList);   
-			 System.out.println("여기는 왔나 1 ");
-			 
+			
 			 
 			 if (program.run() != true)
 			 {
@@ -51,64 +48,59 @@ public class nono_No {
 			 else
 			 {
 				 
-				 
-				 System.out.println("Type" + parameterList[4].getParameterType());
+				ProgramParameter[] pra =   program.getParameterList();
+				
+			//check the parameter type
+			// System.out.println("Parameter Type" + parameterList[4].getParameterType());
+				 // Print 1st Param
 				 String srt0 =
 						 	(String) new AS400Text(7,as400System).toObject(parameterList[0].getInputData());
-						 	System.out.println(srt0);
-				 System.out.println("으흐");
-				 
+						
+				 System.out.println(srt0);
+				 // Print 2nd Param				 
 				 String srt1 =
 						 	(String) new AS400Text(457,as400System).toObject(parameterList[1].getInputData());
 						 	System.out.println(srt1);
-				 System.out.println("으흐");
+				// Print 3rd Param
 				 String srt2 =
 						 	(String) new AS400Text(14,as400System).toObject(parameterList[2].getInputData());
 						 	System.out.println(srt2);
-				 System.out.println("으흐");
-				 
+			   // Print 4th Param				 
 				 String srt3 =
 						 	(String) new AS400Text(1,as400System).toObject(parameterList[3].getInputData());
 						 	System.out.println(srt3);
-				 System.out.println("으흐");
-				 
-				 
+				// Print 5th Param				 
 				 String srt4 =
 						 	(String) new AS400Text(40,as400System).toObject(parameterList[4].getInputData());
 						 	System.out.println(srt4);
-				 System.out.println("으흐");
-				
-				 
-				System.out.println("아웃풋 확인");
+				// output size check	
+						 	
+				System.out.println("check output");
 				
 				for (int i=0; i<4;i++){
 					
-					int len = parameterList[1].getOutputDataLength();
-					System.out.println("크기   ==>  " + len );
-				}
+					int len = parameterList[i].getOutputDataLength();
+					System.out.println("length of " + i   +"-->" + len );
+					}
 							
 			 	byte[] data = parameterList[1].getInputData();
-			 			 	
+			 	
 			 	if (data != null){
 			 		
 					int len = parameterList[1].getOutputDataLength();
 					AS400Text typeConverter = new AS400Text(len,as400System);
 					String apiOutput = (String) typeConverter.toObject(data);
 					System.out.println("apiOutput " + apiOutput);		
+			 	
 			 	}
 			 				 	
 			 	/* AS400Text textData = new AS400Text(600, as400System);   
 					String message1 = (String) textData.toObject(parameterList[0].getOutputData());  
-					 
+	 
 					 System.out.println(message1);
 				 */
 				 
-				 
 				 }
-			 
-			 
-		 
-			 
 			 // Done with the system.
 		 	as400System.disconnectAllServices();
 				
