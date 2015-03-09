@@ -13,13 +13,19 @@ import com.ibm.as400.access.ObjectDoesNotExistException;
 import com.ibm.as400.access.ProgramCall;
 import com.ibm.as400.access.ProgramParameter;
 
+
 public class nono_No {
 
 	public static void main(String[] args) throws AS400SecurityException, ErrorCompletingRequestException, IOException, InterruptedException, ObjectDoesNotExistException, PropertyVetoException {
 		// TODO Auto-generated method stub
 		// parameter setup
 		
-	 
+		/*Trace.setTraceOn(true);
+		Trace.setTraceAllOn(true);
+		Trace.setTracePCMLOn(true);
+		Trace.setTraceDiagnosticOn(true);*/
+		
+		
 		 AS400 as400System = new AS400("amwkor01","aku0586","xorwhd1");
  
 		 	ProgramCall program = new ProgramCall(as400System);     
@@ -27,8 +33,10 @@ public class nono_No {
 			String programName = "/QSYS.LIB/OMQO314KOR.LIB/EKGKXFR.PGM"; 
 			
 		    para_class pst = new para_class();
+		    
+		    
 		    ProgramParameter[] parameterList = pst.para();
-		     
+	
 			 program.setProgram(programName, parameterList);   
 			
 			 
@@ -49,6 +57,16 @@ public class nono_No {
 			 {
 				 
 				ProgramParameter[] pra =   program.getParameterList();
+				byte[] output1 = pra[1].getOutputData();
+				
+				int len2 = pra[1].getOutputDataLength();
+				System.out.println("len2 --> " + len2);
+				
+				AS400DataType aaa = new AS400Text(len2, as400System);
+				
+				String apiOutput1 = (String) aaa.toObject(output1);
+				
+				System.out.println("Sucees?" + apiOutput1);
 				
 			//check the parameter type
 			// System.out.println("Parameter Type" + parameterList[4].getParameterType());
@@ -79,21 +97,22 @@ public class nono_No {
 				
 				for (int i=0; i<4;i++){
 					
-					int len = parameterList[i].getOutputDataLength();
+					int len = pra[i].getOutputDataLength();
 					System.out.println("length of " + i   +"-->" + len );
-					}
+					
 							
-			 	byte[] data = parameterList[1].getInputData();
+				
+			 	byte[] data = pra[1].getInputData();
 			 	
 			 	if (data != null){
 			 		
-					int len = parameterList[1].getOutputDataLength();
-					AS400Text typeConverter = new AS400Text(len,as400System);
+					int len1 = pra[i].getOutputDataLength();
+					AS400Text typeConverter = new AS400Text(457,as400System);
 					String apiOutput = (String) typeConverter.toObject(data);
-					System.out.println("apiOutput " + apiOutput);		
+					System.out.println("apiOutput 457 " + apiOutput);		
 			 	
 			 	}
-			 				 	
+				}		 	
 			 	/* AS400Text textData = new AS400Text(600, as400System);   
 					String message1 = (String) textData.toObject(parameterList[0].getOutputData());  
 	 
